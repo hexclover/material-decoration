@@ -30,6 +30,7 @@
 // Qt
 #include <QDebug>
 #include <QAction>
+#include <QApplication>
 #include <QFontMetrics>
 #include <QPainter>
 
@@ -59,7 +60,8 @@ void TextButton::paintIcon(QPainter *painter, const QRectF &iconRect, const qrea
     Q_UNUSED(gridUnit)
 
     // Font
-    painter->setFont(decoration()->settings()->font());
+    const auto *deco = qobject_cast<Decoration *>(decoration());
+    painter->setFont(deco->getMenuFont());
 
     // TODO: Use Qt::TextShowMnemonic when Alt is pressed
     const bool isAltPressed = false;
@@ -79,7 +81,7 @@ QSize TextButton::getTextSize()
     //     Qt::ElideRight,
     //     100, // Max width TODO: scale by dpi
     // );
-    const int textWidth = deco->getTextWidth(m_text);
+    const int textWidth = deco->getMenuTextWidth(m_text);
     const int titleBarHeight = deco->titleBarHeight();
     const QSize size(textWidth, titleBarHeight);
     return size;
