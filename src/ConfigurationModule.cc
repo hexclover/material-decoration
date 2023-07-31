@@ -150,6 +150,10 @@ void ConfigurationModule::init()
     menuButtonHorzPadding->setObjectName(QStringLiteral("kcfg_MenuButtonHorzPadding"));
     menuForm->addRow(i18n("Padding:"), menuButtonHorzPadding);
 
+    QCheckBox *menuUseMenuFont = new QCheckBox(menuTab);
+    menuUseMenuFont->setText(i18n("Use menu font when drawing menu items"));
+    menuUseMenuFont->setObjectName(QStringLiteral("kcfg_MenuUseMenuFont"));
+    menuForm->addRow(QStringLiteral(""), menuUseMenuFont);
 
     //--- Animations
     QWidget *animationsTab = new QWidget(tabWidget);
@@ -232,6 +236,12 @@ void ConfigurationModule::init()
         m_menuButtonHorzPadding,
         1,
         QStringLiteral("MenuButtonHorzPadding")
+    );
+    skel->addItemBool(
+        QStringLiteral("MenuUseMenuFont"),
+        m_menuUseMenuFont,
+        false,
+        QStringLiteral("MenuUseMenuFont")
     );
     skel->addItemBool(
         QStringLiteral("AnimationsEnabled"),

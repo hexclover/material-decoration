@@ -92,6 +92,7 @@ private:
     void updateShadow();
 
     bool menuAlwaysShow() const;
+    bool menuUseMenuFont() const;
     bool animationsEnabled() const;
     int animationsDuration() const;
     int buttonPadding() const;
@@ -109,7 +110,8 @@ private:
     bool bottomBorderVisible() const;
 
     bool titleBarIsHovered() const;
-    int getTextWidth(const QString text, bool showMnemonic = false) const;
+    const QFont getMenuFont() const;
+    int getMenuTextWidth(const QString text, bool showMnemonic = false) const;
     QPoint windowPos() const;
 
     void initDragMove(const QPoint pos);

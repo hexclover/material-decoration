@@ -649,6 +649,11 @@ bool Decoration::menuAlwaysShow() const
     return m_internalSettings->menuAlwaysShow();
 }
 
+bool Decoration::menuUseMenuFont() const
+{
+    return m_internalSettings->menuUseMenuFont();
+}
+
 bool Decoration::animationsEnabled() const
 {
     return m_internalSettings->animationsEnabled();
@@ -759,9 +764,14 @@ bool Decoration::titleBarIsHovered() const
     return sectionUnderMouse() == Qt::TitleBarArea;
 }
 
-int Decoration::getTextWidth(const QString text, bool showMnemonic) const
+const QFont Decoration::getMenuFont() const
 {
-    const QFontMetrics fontMetrics(settings()->font());
+    return menuUseMenuFont() ? QApplication::font("QMenu") : settings()->font();
+}
+
+int Decoration::getMenuTextWidth(const QString text, bool showMnemonic) const
+{
+    const QFontMetrics fontMetrics(getMenuFont());
     const QRect textRect(titleBarRect());
     int flags = showMnemonic ? Qt::TextShowMnemonic : Qt::TextHideMnemonic;
     const QRect boundingRect = fontMetrics.boundingRect(textRect, flags, text);
